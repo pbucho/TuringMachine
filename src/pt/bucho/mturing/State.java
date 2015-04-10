@@ -30,6 +30,11 @@ public class State {
 		checkStateConsistency();
 	}
 	
+	public State(String name, int stateType, List<Transition> t) throws InconsistentStateException{
+		this(name, stateType);
+		transitions.addAll(t);
+	}
+	
 	public State(String name, Transition t){
 		this(name);
 		transitions.add(t);
@@ -44,8 +49,20 @@ public class State {
 		return transitions;
 	}
 	
-	public void addTransision(Transition t){
+	public Transition[] getTransitionsArray(){
+		Transition[] trans = new Transition[transitions.size()];
+		for(int i = 0; i < transitions.size(); i++){
+			trans[i] = transitions.get(i);
+		}
+		return trans;
+	}
+	
+	public void addTransition(Transition t){
 		transitions.add(t);
+	}
+	
+	public void addTransitions(List<Transition> t){
+		transitions.addAll(t);
 	}
 	
 	public void setTransitions(List<Transition> transitions) {
@@ -83,5 +100,10 @@ public class State {
 
 	public void setInitialState(boolean initialState) {
 		this.initialState = initialState;
+	}
+	
+	@Override
+	public String toString(){
+		return name;
 	}
 }

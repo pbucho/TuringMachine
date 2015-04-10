@@ -2,6 +2,7 @@ package pt.bucho.mturing;
 
 public class Position {
 
+	public static final char blankChar = '\0';
 	char value;
 
 	public Position(){
