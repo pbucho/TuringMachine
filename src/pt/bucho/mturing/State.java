@@ -5,6 +5,10 @@ import java.util.List;
 
 public class State {
 	
+	public static final int reject = -1;
+	public static final int initial = 0;
+	public static final int accept = 1;
+	
 	public final String name;
 	List<Transition> transitions = new LinkedList<Transition>();
 	boolean acceptState;
@@ -18,16 +22,15 @@ public class State {
 	public State(String name, int stateType) throws InconsistentStateException{ // -1 rejeição, 0 iniciação, 1 aceitação, 2 normal
 		this(name);
 		switch(stateType){
-			case -1:
+			case reject:
 				rejectState = true;
 				break;
-			case 0:
+			case initial:
 				initialState = true;
 				break;
-			case 1:
+			case accept:
 				acceptState = true;
 		}
-		checkStateConsistency();
 	}
 	
 	public State(String name, int stateType, List<Transition> t) throws InconsistentStateException{
@@ -68,30 +71,25 @@ public class State {
 	public void setTransitions(List<Transition> transitions) {
 		this.transitions = transitions;
 	}
-
-	private boolean checkStateConsistency() throws InconsistentStateException{
-		if(acceptState && rejectState)
-			throw new InconsistentStateException("State " + name + " is both accept and reject state");
-		else
-			return true;
-	}
 	
 	public boolean isRejectState() {
 		return rejectState;
 	}
 
-	public void setRejectState(boolean rejectState) throws InconsistentStateException {
+	public void setRejectState(boolean rejectState) {
 		this.rejectState = rejectState;
-		checkStateConsistency();
+		if(rejectState)
+			this.acceptState = false;
 	}
 
 	public boolean isAcceptState() {
 		return acceptState;
 	}
 
-	public void setAcceptState(boolean acceptState) throws InconsistentStateException {
+	public void setAcceptState(boolean acceptState) {
 		this.acceptState = acceptState;
-		checkStateConsistency();
+		if(acceptState)
+			this.rejectState = false;
 	}
 
 	public boolean isInitialState() {

@@ -13,37 +13,45 @@ public class Main {
 
 	public static final char blankChar = Position.blankChar;
 	
-	public static void main(String[] args) {
-		
-		List<State> states = new LinkedList<State>();
-		
-		State aceitacao, inicial, intermedio;
+	public static void main(String[] args) {		
 		try {
-			aceitacao = new State("qa", 1);
-			inicial = new State("q0", 0);
-			intermedio = new State("q1", 1);
+			List<State> states = new LinkedList<State>();
 			
-			List<Transition> trInicial= new LinkedList<Transition>();
-			List<Transition> trInter= new LinkedList<Transition>();
+			State[] st = new State[5];
 			
-			trInicial.add(new Transition('0', '0', 1, intermedio));
-			trInicial.add(new Transition('1', '1', 1, intermedio));
-			trInicial.add(new Transition(blankChar, blankChar, 1, aceitacao));
-			trInter.add(new Transition('0', '0', 1, inicial));
-			trInter.add(new Transition('1', '1', 1, inicial));
+			st[0] = new State("q1");
+			st[1] = new State("q0", State.initial);
+			st[2] = new State("q2");
+			st[3] = new State("q3");
+			st[4] = new State("qa", State.accept);
 			
-			inicial.addTransitions(trInicial);
-			intermedio.addTransitions(trInter);
+			Transition[] ts = new Transition[7];
 			
-			states.add(inicial);
-			states.add(intermedio);
-			states.add(aceitacao);
+			ts[0] = new Transition('1', '1', Transition.right, st[0]);
+			ts[1] = new Transition('1', '1', Transition.right, st[2]);
+			ts[2] = new Transition('1', '1', Transition.right, st[1]);
+			ts[3] = new Transition(blankChar, blankChar, Transition.stay, st[4]);
+			ts[4] = new Transition(blankChar, '1', Transition.right, st[3]);
+			ts[5] = new Transition(blankChar, '1', Transition.left, st[4]);
+			ts[6] = new Transition(blankChar, '1', Transition.stay, st[4]);
 			
-			Machine turing = new Machine(states);
+			st[0].addTransition(ts[0]);
+			st[0].addTransition(ts[3]);
+			st[1].addTransition(ts[1]);
+			st[1].addTransition(ts[4]);
+			st[2].addTransition(ts[2]);
+			st[2].addTransition(ts[6]);
+			st[3].addTransition(ts[5]);
 			
-			turing.runMachine(("01" + blankChar).toCharArray());
+			for(State s : st)
+				states.add(s);
 			
-			System.out.println(turing);
+			Machine mq = new Machine(states);
+			
+			mq.runMachine("".toCharArray());
+			
+			System.out.println(mq);
+
 			
 		} catch (InconsistentStateException e) {
 			// TODO Auto-generated catch block

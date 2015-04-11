@@ -47,6 +47,7 @@ public class Machine {
 					if(s.initialState){
 						states.remove(count);
 						states.add(0, s);
+						break;
 					}
 					count++;
 				}
@@ -66,10 +67,10 @@ public class Machine {
 				if(t.initialChar == tape.getCurrentChar()){
 					tape.setCurrentChar(t.finalChar);
 					switch(t.move){
-						case -1:
+						case Transition.left:
 							tape.moveLeft();
 							break;
-						case 1:
+						case Transition.right:
 							tape.moveRight();
 					}
 					currentState = t.finalState;

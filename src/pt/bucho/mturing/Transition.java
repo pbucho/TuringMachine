@@ -1,6 +1,10 @@
 package pt.bucho.mturing;
 
 public class Transition {
+	
+	public static final int left = -1;
+	public static final int stay = 0;
+	public static final int right = 1;
 
 	public final char initialChar;
 	public final char finalChar;

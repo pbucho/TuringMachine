@@ -9,8 +9,12 @@ public class Tape {
 	int current = 0;
 	
 	public Tape(char[] string){
-		for(Character c : string){
-			positions.add(new Position(c));
+		if(string.toString().isEmpty())
+			positions.add(new Position(Position.blankChar));
+		else{
+			for(Character c : string){
+				positions.add(new Position(c));
+			}
 		}
 	}
 	
@@ -33,7 +37,7 @@ public class Tape {
 			pos = positions.get(current);
 		}catch(IndexOutOfBoundsException e){
 			for(int i = positions.size(); i <= current; i++)
-				positions.add(i, new Position());
+				positions.add(i, new Position(Position.blankChar));
 			pos = positions.get(current);
 		}
 		return pos;
