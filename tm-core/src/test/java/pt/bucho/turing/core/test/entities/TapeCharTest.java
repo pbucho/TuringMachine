@@ -1,6 +1,8 @@
 package pt.bucho.turing.core.test.entities;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -16,7 +18,7 @@ public class TapeCharTest {
 	@Test
 	public void noArgConstructorTest() {
 		character = new TapeCharImpl();
-		assertEquals(' ', character.getChar());
+		assertEquals('_', character.getChar());
 	}
 	
 	@Test
@@ -33,7 +35,7 @@ public class TapeCharTest {
 	}
 	
 	@Test
-	public void invalidCharThrowsException() {
+	public void invalidCharThrowsExceptionTest() {
 		character = new TapeCharImpl();
 		try {
 			character.setChar('|');
@@ -49,5 +51,16 @@ public class TapeCharTest {
 			// all good
 		}
 	}
-
+	
+	@Test
+	public void emptyCharTest() throws TuringException{
+		character = new TapeCharImpl();
+		
+		assertTrue(character.isEmpty());
+		
+		character.setChar('a');
+		
+		assertFalse(character.isEmpty());
+	}
+	
 }

@@ -8,5 +8,6 @@ public interface TapeChar {
 	// language alphabet or the working alphabet (reserved character)
 	public void setChar(char character) throws TuringException;
 	public char getChar();
+	public boolean isEmpty();
 
 }
