@@ -1,18 +1,18 @@
 package pt.bucho.turing.core.entities;
 
-import pt.bucho.turing.api.entities.RibbonChar;
+import pt.bucho.turing.api.entities.TapeChar;
 import pt.bucho.turing.api.exceptions.TuringException;
 
-public class RibbonCharImpl implements RibbonChar {
+public class TapeCharImpl implements TapeChar {
 
 	private char character;
 	private static final char RESERVED = '|';
 	
-	public RibbonCharImpl() {
+	public TapeCharImpl() {
 		this.character = ' ';
 	}
 	
-	public RibbonCharImpl(char character) throws TuringException {
+	public TapeCharImpl(char character) throws TuringException {
 		setChar(character);
 	}
 	
