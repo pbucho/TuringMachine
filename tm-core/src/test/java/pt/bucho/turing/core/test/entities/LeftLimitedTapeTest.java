@@ -4,7 +4,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 import static org.fusesource.jansi.Ansi.Color.RED;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import pt.bucho.turing.api.entities.Tape;
 import pt.bucho.turing.api.entities.TapeChar;
+import pt.bucho.turing.api.exceptions.ReachedLeftTapeEnd;
 import pt.bucho.turing.api.exceptions.TuringException;
 import pt.bucho.turing.core.entities.LeftLimitedTape;
 import pt.bucho.turing.core.entities.TapeCharImpl;
@@ -54,26 +55,22 @@ public class LeftLimitedTapeTest {
 			tape.setChar(character);
 			tape.moveLeft();
 			fail("Should have thrown exception");
-		} catch (TuringException e){
-			// all good
+		} catch (TuringException e) {
+			if (!(e instanceof ReachedLeftTapeEnd)) {
+				fail("Exception is not an instance of ReachedLeftTapeEnd");
+			}
 		}
 	}
 	
 	@Test
 	public void blankSpacesAreNotNull() throws TuringException {
 		tape = new LeftLimitedTape();
-		
+
 		assertNotNull(tape.getChar());
-		assertNotNull(tape.moveRight());
-		assertNotNull(tape.moveRight());
-		assertNotNull(tape.moveRight());
-		assertNotNull(tape.moveRight());
-		assertNotNull(tape.moveRight());
-		assertNotNull(tape.moveRight());
-		assertNotNull(tape.moveRight());
-		assertNotNull(tape.moveRight());
-		assertNotNull(tape.moveRight());
-		
+		for (int i = 0; i < 9; i++) {
+			assertNotNull(tape.moveRight());
+		}
+
 	}
 	
 	@Test
@@ -88,13 +85,12 @@ public class LeftLimitedTapeTest {
 	
 	@Test
 	public void tapeAutomaticRightExpansion() throws TuringException {
-		tape = new LeftLimitedTape("Word");
+		tape = new LeftLimitedTape("a");
 		
-		tape.moveRight();
-		tape.moveRight();
-		tape.moveRight();
+		assertNotNull(tape.moveRight());
+		assertTrue(tape.getChar().isEmpty());
 		
-		assertNull(tape.moveRight());
+		assertEquals('a', tape.moveLeft().getChar());
 	}
-
+	
 }

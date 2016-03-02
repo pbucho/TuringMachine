@@ -5,6 +5,7 @@ import static org.fusesource.jansi.Ansi.Color.RED;
 
 import pt.bucho.turing.api.entities.Tape;
 import pt.bucho.turing.api.entities.TapeChar;
+import pt.bucho.turing.api.exceptions.ReachedLeftTapeEnd;
 import pt.bucho.turing.api.exceptions.TuringException;
 
 public class LeftLimitedTape implements Tape {
@@ -27,10 +28,14 @@ public class LeftLimitedTape implements Tape {
 
 	public TapeChar moveLeft() throws TuringException {
 		currentPosition--;
+		if(currentPosition < 0){
+			currentPosition = 0;
+			throw new ReachedLeftTapeEnd("Reached left end of tape");
+		}
 		return getChar();
 	}
 
-	public TapeChar moveRight() throws TuringException {
+	public TapeChar moveRight() {
 		currentPosition++;
 		if (currentPosition >= tape.length) {
 			expandTape();
@@ -38,21 +43,12 @@ public class LeftLimitedTape implements Tape {
 		return getChar();
 	}
 
-	public void setChar(TapeChar character) throws TuringException {
+	public void setChar(TapeChar character) {
 		tape[currentPosition] = character;
 	}
 
-	public TapeChar getChar() throws TuringException {
-		try {
-			return tape[currentPosition];
-		} catch (IndexOutOfBoundsException e) {
-			if (currentPosition < 0) {
-				currentPosition = 0;
-				throw new TuringException("Reached left end of tape");
-			} else {
-				throw new TuringException();
-			}
-		}
+	public TapeChar getChar() {
+		return tape[currentPosition];
 	}
 
 	@Override
@@ -68,12 +64,13 @@ public class LeftLimitedTape implements Tape {
 		return output;
 	}
 
-	private void expandTape() {
+	protected void expandTape() {
 		TapeChar[] newTape = new TapeCharImpl[tape.length * 2];
 		for (int i = 0; i < tape.length; i++) {
 			newTape[i] = tape[i];
 		}
 		tape = newTape;
+		initBlankSpaces();
 	}
 
 	// taylor swift ?
