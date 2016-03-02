@@ -7,30 +7,33 @@ import pt.bucho.turing.api.exceptions.TuringException;
 public class LeftLimitedRibbon implements Ribbon {
 
 	private RibbonChar[] ribbon;
-	
+	private int currentPosition = 0;
 	
 	public LeftLimitedRibbon() {
 		ribbon = new RibbonCharImpl[10];
 	}
 	
 	public RibbonChar moveLeft() throws TuringException {
-		// TODO Auto-generated method stub
-		return null;
+		currentPosition--;
+		return getChar();
 	}
 
 	public RibbonChar moveRight() throws TuringException {
-		// TODO Auto-generated method stub
-		return null;
+		currentPosition++;
+		return getChar();
 	}
 
 	public void setChar(RibbonChar character) throws TuringException {
-		// TODO Auto-generated method stub
-		
+		ribbon[currentPosition] = character;
 	}
 
 	public RibbonChar getChar() throws TuringException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return ribbon[currentPosition];
+		}catch (IndexOutOfBoundsException e){
+			currentPosition = 0;
+			throw new TuringException("Reached left end of ribbon");
+		}
 	}
 
 }
