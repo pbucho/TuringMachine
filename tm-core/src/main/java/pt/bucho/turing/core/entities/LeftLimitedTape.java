@@ -2,10 +2,9 @@ package pt.bucho.turing.core.entities;
 
 import static org.fusesource.jansi.Ansi.ansi;
 import static org.fusesource.jansi.Ansi.Color.RED;
-
 import pt.bucho.turing.api.entities.Tape;
 import pt.bucho.turing.api.entities.TapeChar;
-import pt.bucho.turing.api.exceptions.ReachedLeftTapeEnd;
+import pt.bucho.turing.api.exceptions.HaltException;
 import pt.bucho.turing.api.exceptions.TuringException;
 
 public class LeftLimitedTape implements Tape {
@@ -26,11 +25,11 @@ public class LeftLimitedTape implements Tape {
 		initBlankSpaces();
 	}
 
-	public TapeChar moveLeft() throws TuringException {
+	public TapeChar moveLeft() {
 		currentPosition--;
 		if(currentPosition < 0){
 			currentPosition = 0;
-			throw new ReachedLeftTapeEnd("Reached left end of tape");
+			throw new HaltException("Reached left end of tape");
 		}
 		return getChar();
 	}

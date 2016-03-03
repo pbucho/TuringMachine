@@ -4,9 +4,9 @@ import pt.bucho.turing.api.exceptions.TuringException;
 
 public interface Tape {
 
-	public TapeChar moveLeft() throws TuringException;
-	public TapeChar moveRight() throws TuringException;
-	public void setChar(TapeChar character) throws TuringException;
-	public TapeChar getChar() throws TuringException;
+	public TapeChar moveLeft();
+	public TapeChar moveRight();
+	public void setChar(TapeChar character);
+	public TapeChar getChar();
 	
 }

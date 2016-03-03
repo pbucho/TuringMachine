@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import pt.bucho.turing.api.entities.Tape;
 import pt.bucho.turing.api.entities.TapeChar;
-import pt.bucho.turing.api.exceptions.ReachedLeftTapeEnd;
+import pt.bucho.turing.api.exceptions.HaltException;
 import pt.bucho.turing.api.exceptions.TuringException;
 import pt.bucho.turing.core.entities.LeftLimitedTape;
 import pt.bucho.turing.core.entities.TapeCharImpl;
@@ -55,10 +55,8 @@ public class LeftLimitedTapeTest {
 			tape.setChar(character);
 			tape.moveLeft();
 			fail("Should have thrown exception");
-		} catch (TuringException e) {
-			if (!(e instanceof ReachedLeftTapeEnd)) {
-				fail("Exception is not an instance of ReachedLeftTapeEnd");
-			}
+		} catch (HaltException e) {
+			
 		}
 	}
 	
