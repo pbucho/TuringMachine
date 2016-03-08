@@ -53,7 +53,7 @@ public class TapeCharTest {
 	}
 	
 	@Test
-	public void emptyCharTest() throws TuringException{
+	public void emptyCharTest() throws TuringException {
 		character = new TapeCharImpl();
 		
 		assertTrue(character.isEmpty());
@@ -61,6 +61,13 @@ public class TapeCharTest {
 		character.setChar('a');
 		
 		assertFalse(character.isEmpty());
+	}
+	
+	@Test
+	public void toStringTest() throws TuringException {
+		character = new TapeCharImpl('5');
+		
+		assertEquals("5", character.toString());
 	}
 	
 }

@@ -1,13 +1,20 @@
 package pt.bucho.turing.core.test.services;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.bucho.turing.api.entities.State;
 import pt.bucho.turing.api.entities.TuringMachine;
 import pt.bucho.turing.api.exceptions.TuringException;
 import pt.bucho.turing.api.services.Compiler;
+import pt.bucho.turing.core.entities.StateImpl;
 import pt.bucho.turing.core.services.DumbCompiler;
 
 public class DumbCompilerTest {
@@ -16,10 +23,25 @@ public class DumbCompilerTest {
 	private TuringMachine tm;
 	
 	private List<State> expectedStates;
+	private State q0, q1, qa, qr;
 	
 	@Before
 	public void setUp() throws Exception {
 		compiler = new DumbCompiler();
+		
+		q0 = new StateImpl("q0");
+		q1 = new StateImpl("q0");
+		qa = new StateImpl("q0");
+		qr = new StateImpl("q0");
+		
+		q0.setInitialState(true);
+		qa.setAcceptingState(true);
+		
+		expectedStates = new ArrayList<State>();
+		expectedStates.add(q0);
+		expectedStates.add(q1);
+		expectedStates.add(qa);
+		expectedStates.add(qr);
 	}
 
 	@Test
@@ -29,8 +51,17 @@ public class DumbCompilerTest {
 	}
 	
 	@Test
-	public void parseProgram() {
+	public void parseProgram() throws TuringException {
+		compileTest();
+		Map<String,State> actualStates = tm.getStates();
+
+		assertEquals(expectedStates.size(), actualStates.size());
 		
+		for(State expectedState : expectedStates) {
+			State actualState = actualStates.get(expectedState.getName());
+			assertNotNull(actualState);
+			assertEquals(expectedState, actualState);
+		}
 	}
 
 }

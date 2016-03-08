@@ -2,6 +2,7 @@ package pt.bucho.turing.core.entities;
 
 import static org.fusesource.jansi.Ansi.ansi;
 import static org.fusesource.jansi.Ansi.Color.RED;
+
 import pt.bucho.turing.api.entities.Tape;
 import pt.bucho.turing.api.entities.TapeChar;
 import pt.bucho.turing.api.exceptions.HaltException;

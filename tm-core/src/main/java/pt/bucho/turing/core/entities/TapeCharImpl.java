@@ -31,5 +31,10 @@ public class TapeCharImpl implements TapeChar {
 	public boolean isEmpty() {
 		return character == EMPTY_CHAR;
 	}
+	
+	@Override
+	public String toString() {
+		return "" + character;
+	}
 
 }
