@@ -12,9 +12,9 @@ import pt.bucho.turing.api.entities.TuringMachine;
 import pt.bucho.turing.api.exceptions.CompilationException;
 import pt.bucho.turing.api.exceptions.TuringException;
 import pt.bucho.turing.api.services.Compiler;
+import pt.bucho.turing.core.entities.DeterministicTuringMachine;
 import pt.bucho.turing.core.entities.StateImpl;
 import pt.bucho.turing.core.entities.TransitionImpl;
-import pt.bucho.turing.core.entities.TuringMachineImpl;
 
 public class DumbCompiler implements Compiler {
 	
@@ -29,7 +29,7 @@ public class DumbCompiler implements Compiler {
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
 
-		compiledMachine = new TuringMachineImpl();
+		compiledMachine = new DeterministicTuringMachine();
 		
 		try {
 			String line;
@@ -42,7 +42,7 @@ public class DumbCompiler implements Compiler {
 			e.printStackTrace();
 		}
 
-		return null;
+		return new DeterministicTuringMachine();
 	}
 
 	private void interpretLine(String line) throws CompilationException {

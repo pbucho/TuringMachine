@@ -10,11 +10,11 @@ import pt.bucho.turing.api.entities.Transition;
 import pt.bucho.turing.api.entities.TuringMachine;
 import pt.bucho.turing.api.exceptions.TuringException;
 
-public class TuringMachineImpl implements TuringMachine {
+public class DeterministicTuringMachine implements TuringMachine {
 
 	private Map<String, State> states;
 
-	public TuringMachineImpl() {
+	public DeterministicTuringMachine() {
 		states = new HashMap<String, State>();
 	}
 
