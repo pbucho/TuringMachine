@@ -15,15 +15,12 @@ public class DeterministicTuringMachine implements TuringMachine {
 
 	private Map<String, State> states;
 	private List<Transition> transitions;
+	private boolean isHalted;
 
 	public DeterministicTuringMachine() {
 		states = new HashMap<String, State>();
 		transitions = new ArrayList<Transition>();
-	}
-
-	public void run() {
-		// TODO Auto-generated method stub
-
+		isHalted = false;
 	}
 
 	public Map<String, State> getStates() {
@@ -31,22 +28,15 @@ public class DeterministicTuringMachine implements TuringMachine {
 	}
 
 	public void setStates(Map<String, State> states) {
-		// TODO Auto-generated method stub
-
+		this.states = states;
 	}
 
 	public boolean isHalted() {
-		// TODO Auto-generated method stub
-		return false;
+		return isHalted;
 	}
 
 	public void setHalted(boolean halted) {
-
-	}
-
-	public void setInput(TapeChar[] input) {
-		// TODO Auto-generated method stub
-
+		this.isHalted = halted;
 	}
 
 	public void addState(State state) throws TuringException {
@@ -64,9 +54,10 @@ public class DeterministicTuringMachine implements TuringMachine {
 		return transitions;
 	}
 
-	public void setTransitions(List<Transition> transitions) {
-		// TODO Auto-generated method stub
-
+	public void setTransitions(List<Transition> transitions) throws TuringException {
+		for(Transition transition : transitions){
+			addTransition(transition);
+		}
 	}
 
 	public void addTransition(Transition transition) throws TuringException {
@@ -79,9 +70,9 @@ public class DeterministicTuringMachine implements TuringMachine {
 		transitions.add(transition);
 	}
 
-	public TapeChar[] getInput() {
+	public void execute(TapeChar[] input) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }
