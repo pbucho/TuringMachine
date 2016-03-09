@@ -1,11 +1,14 @@
 package pt.bucho.turing.core.entities;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import pt.bucho.turing.api.entities.State;
 import pt.bucho.turing.api.entities.TapeChar;
+import pt.bucho.turing.api.entities.Transition;
 import pt.bucho.turing.api.entities.TuringMachine;
+import pt.bucho.turing.api.exceptions.TuringException;
 
 public class TuringMachineImpl implements TuringMachine {
 
@@ -41,6 +44,31 @@ public class TuringMachineImpl implements TuringMachine {
 	public void setInput(TapeChar[] input) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void addState(State state) throws TuringException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<Transition> getTransitions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setTransitions(List<Transition> transitions) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addTransition(Transition transition) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public TapeChar[] getInput() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
