@@ -10,7 +10,7 @@ import pt.bucho.turing.api.entities.State;
 import pt.bucho.turing.api.exceptions.TuringException;
 import pt.bucho.turing.core.entities.StateImpl;
 
-public class AddStateTest extends AbstractTuringMachineTest {
+public class AddStateTest extends AbstractDeterministicTuringMachineTest {
 
 	private State state1, state2;
 

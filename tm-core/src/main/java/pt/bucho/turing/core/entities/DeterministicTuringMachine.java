@@ -1,5 +1,6 @@
 package pt.bucho.turing.core.entities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,9 +14,11 @@ import pt.bucho.turing.api.exceptions.TuringException;
 public class DeterministicTuringMachine implements TuringMachine {
 
 	private Map<String, State> states;
+	private List<Transition> transitions;
 
 	public DeterministicTuringMachine() {
 		states = new HashMap<String, State>();
+		transitions = new ArrayList<Transition>();
 	}
 
 	public void run() {
@@ -58,8 +61,7 @@ public class DeterministicTuringMachine implements TuringMachine {
 	}
 
 	public List<Transition> getTransitions() {
-		// TODO Auto-generated method stub
-		return null;
+		return transitions;
 	}
 
 	public void setTransitions(List<Transition> transitions) {
@@ -67,9 +69,14 @@ public class DeterministicTuringMachine implements TuringMachine {
 
 	}
 
-	public void addTransition(Transition transition) {
-		// TODO Auto-generated method stub
-
+	public void addTransition(Transition transition) throws TuringException {
+		for (Transition existingTransition : transitions) {
+			if (transition.equals(existingTransition)) {
+				throw new TuringException(
+						"Deterministic machine can't have ambiguous transitions");
+			}
+		}
+		transitions.add(transition);
 	}
 
 	public TapeChar[] getInput() {

@@ -11,7 +11,6 @@ import pt.bucho.turing.api.entities.TuringMachine;
 import pt.bucho.turing.core.entities.StateImpl;
 import pt.bucho.turing.core.entities.TapeCharImpl;
 import pt.bucho.turing.core.entities.TransitionImpl;
-import pt.bucho.turing.core.entities.DeterministicTuringMachine;
 
 public abstract class AbstractTuringMachineTest {
 
@@ -23,8 +22,6 @@ public abstract class AbstractTuringMachineTest {
 	protected TapeChar conditionChar, newChar;
 	
 	protected void setUp() throws Exception {
-		turingMachine = new DeterministicTuringMachine();
-		
 		state1 = new StateImpl("state1");
 		state2 = new StateImpl("state2");
 		states = new HashMap<String, State>();
@@ -41,7 +38,6 @@ public abstract class AbstractTuringMachineTest {
 		transition.setNewChar(newChar);
 		transition.setDirection(Direction.RIGHT);
 		
-		turingMachine.addTransition(transition);
 	}
 
 }

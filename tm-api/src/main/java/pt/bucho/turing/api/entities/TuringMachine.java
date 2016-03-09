@@ -13,7 +13,7 @@ public interface TuringMachine extends Runnable {
 	
 	public List<Transition> getTransitions();
 	public void setTransitions(List<Transition> transitions);
-	public void addTransition(Transition transition);
+	public void addTransition(Transition transition) throws TuringException;
 	
 	public TapeChar[] getInput();
 	public void setInput(TapeChar[] input);

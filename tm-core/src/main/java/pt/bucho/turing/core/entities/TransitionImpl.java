@@ -57,5 +57,26 @@ public class TransitionImpl implements Transition {
 	public String toString() {
 		return departingState + "--" + conditionChar + "->" + newChar + "," + direction + "--" + arrivingState;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj){
+			return true;
+		}
+		if(obj == null){
+			return false;
+		}
+		if(!(obj instanceof Transition)){
+			return false;
+		}
+		Transition other = (Transition) obj;
+		if(!departingState.equals(other.getDepartingState())){
+			return false;
+		}
+		if(!arrivingState.equals(other.getArrivingState())){
+			return false;
+		}
+		return conditionChar.equals(other.getConditionChar());
+	}
 
 }
